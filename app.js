@@ -16,9 +16,12 @@ app.use(
       credentials: true
     })
   );
+  
 
 app.get('/', (req, res) => res.send('Welcome to node js api authentication project'))
 
+
+app.use('/api/auth', require('./routes/users'))
 
 app.use((req, res, next) => {
     res.status(404).json({
