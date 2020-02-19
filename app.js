@@ -17,7 +17,11 @@ app.use(
     })
   );
   
-
+  console.log(__dirname)
+app.use(express.static(__dirname + "dist/"));
+app.get(/.*/, function(req, res){
+  res.sendfile(__dirname + "/dist/index.html");
+});
 app.get('/', (req, res) => res.send('Welcome to node js api authentication project'))
 
 
