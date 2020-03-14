@@ -21,8 +21,16 @@ app.use(
 // app.get(/.*/, function(req, res){
 //   res.sendfile(__dirname + "/dist/index.html");
 // });
-app.get('/', (req, res) => res.send('Welcome to node js api authentication project'))
+// app.get('/', (req, res) => res.send('Welcome to node js api authentication project'))
 
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use('/', express.static(path.join(__dirname, './client/dist')))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './client/dist', 'index.html'))
+  })
+}
 
 app.use('/api/auth', require('./routes/users'))
 
