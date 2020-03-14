@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+var path = require('path');
 const cors = require('cors')
 require('dotenv').config()
 
@@ -23,21 +24,21 @@ app.use(
 // });
 // app.get('/', (req, res) => res.send('Welcome to node js api authentication project'))
 
-if (process.env.NODE_ENV === 'production') {
+
   // Set static folder
   app.use('/', express.static(path.join(__dirname, './client/dist')))
 
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './client/dist', 'index.html'))
   })
-}
+
 
 app.use('/api/auth', require('./routes/users'))
 
-app.use((req, res, next) => {
-    res.status(404).json({
-        message: 'No Resource found',
-    })
-})
+// app.use((req, res, next) => {
+//     res.status(404).json({
+//         message: 'No Resource found',
+//     })
+// })
 
 module.exports = app
